@@ -1,4 +1,3 @@
-import React from 'react';
 import { Handle, Position } from 'reactflow';
 import { Lock, Target, Plus } from 'lucide-react';
 import { clsx } from 'clsx';
