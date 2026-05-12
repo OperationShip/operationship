@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import ReactFlow, { Background, Controls } from 'reactflow';
 import { Settings, Sparkles, Send, Target, Zap } from 'lucide-react';
 import OperationNode from './components/OperationNode';
