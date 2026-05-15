@@ -16,7 +16,8 @@ app.post('/api/generate', async (req, res) => {
   const { prompt, currentGraph } = req.body;
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    // UPGRADE 1: Faster, more reliable JSON model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
     const fullPrompt = `
       ${SYSTEM_PROMPT}
@@ -34,13 +35,20 @@ app.post('/api/generate', async (req, res) => {
     const response = await result.response;
     const text = response.text();
     
-    // Industrial Step: Clean and Parse
-    const cleanJson = text.replace(/```json|```/g, "").trim();
+    // UPGRADE 2: Bulletproof JSON Extractor
+    // This regex hunts down the first '{' and the last '}' and ignores everything else
+    let cleanJson = text;
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      cleanJson = jsonMatch[0];
+    }
+    
     res.json(JSON.parse(cleanJson));
     
   } catch (error) {
-    console.error("Architectural Failure:", error);
-    res.status(500).json({ error: "The Architect is offline." });
+    // This will now print the actual underlying error to the Vercel logs so we can read it
+    console.error("Architectural Failure Details:", error);
+    res.status(500).json({ error: "The Architect failed to process the request." });
   }
 });
 
