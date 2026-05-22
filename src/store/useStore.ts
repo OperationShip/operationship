@@ -16,6 +16,10 @@ interface OperationState {
   isUnitEconomicsOn: boolean;
   toggleUnitEconomics: () => void;
   targetNode: (nodeId: string) => void;
+
+  // NEW: The Auth & Stripe Foundation
+  currentUserTier: 'free' | 'pro' | 'enterprise';
+  setCurrentUserTier: (tier: 'free' | 'pro' | 'enterprise') => void;
   
   // NEW: AI Execution Logic
   isGenerating: boolean;
@@ -45,6 +49,9 @@ export const useStore = create<OperationState>((set, get) => ({
   toggleAiPanel: () => set({ isAiPanelOpen: !get().isAiPanelOpen }),
   isUnitEconomicsOn: false,
   toggleUnitEconomics: () => set({ isUnitEconomicsOn: !get().isUnitEconomicsOn }),
+  // NEW: Hardcoded to 'pro' for your testing. Change to 'free' before public launch.
+  currentUserTier: 'pro',
+  setCurrentUserTier: (tier) => set({ currentUserTier: tier }),
   targetNode: (nodeId) => {
     const { nodes, chatInput } = get();
     const updatedNodes = nodes.map(node => ({
