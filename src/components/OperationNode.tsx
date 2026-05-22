@@ -10,8 +10,12 @@ export function cn(...inputs: (string | undefined | null | false)[]) {
 
 export default function OperationNode({ data, id }: any) {
   const targetNode = useStore((state) => state.targetNode); 
+  const currentUserTier = useStore((state) => state.currentUserTier); // Fetch user status
+  
   const isGhost = data.status === 'ghost';
-  const isLocked = data.tierRequired === 'pro'; 
+  
+  // LOGIC: It is locked ONLY IF it requires a paid tier AND the user is currently 'free'
+  const isLocked = data.tierRequired !== 'free' && currentUserTier === 'free'; 
   const hasMetrics = !!data.metrics;
   const isUnitEconomicsOn = useStore((state) => state.isUnitEconomicsOn);
 
