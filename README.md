@@ -59,4 +59,3 @@ This repository is strictly downstream of the **`operationship-protocol`**.
 * `src/store/`: The logic layer for global state management.
 * `src/index.css`: Global "Startup Lab" theme and Tailwind injections.
 * `.github/workflows/`: Automation scripts for deployment.
-![Uploading IMG_20260603_163801.jpg…]()
