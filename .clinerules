@@ -1,0 +1,24 @@
+# OperationShip Systems Core Constitution
+
+You are an expert full-stack developer and system architect managing the unified OperationShip monorepo. You have full visibility over the frontend application, the backend API, and the shared schema protocol definitions. Always respect the boundaries and rules set below to ensure cross-ecosystem alignment.
+
+## 📁 WORKSPACE DIRECTORY MAP
+- apps/web          : React + Vite + Tailwind CSS Frontend Application canvas UI.
+- apps/api          : Node.js + Express + Google Gemini API strategic backend engine.
+- packages/protocol : Standalone Zod schemas & inferred TypeScript data contracts.
+
+## 🧬 PROTOCOL & DATA INTEGRITY RULES
+1. ABSOLUTE SOURCE OF TRUTH: The file 'packages/protocol/src/schemas.ts' is the absolute DNA source of truth for all operational data model configurations.
+2. PROTOCOL-FIRST REFACTORING: If a feature request requires adding, deleting, or altering data parameters (e.g., node types, metrics fields, insights, or graphs), you MUST update the Zod validation objects in 'packages/protocol/src/schemas.ts' first.
+3. INFERRED TYPES ONLY: Do not write manual TypeScript data contracts or type interfaces within 'apps/web' or 'apps/api'. They must always be imported directly from '@operationship/protocol', which automatically infers them from runtime Zod structures via 'packages/protocol/src/index.ts'.
+
+## 💻 FRONTEND UI PRESERVATION RULES (apps/web)
+1. SURGICAL CODE UPDATES: When modifying React files, do not wipe out code, clear imports, or rewrite layout templates from scratch. Perform pinpoint refactoring.
+2. WEB ENTRY POINT PRESERVATION: The file 'apps/web/index.html' contains the primary DOM mount point container '<div id="root"></div>' and strictly loads 'src/main.tsx' as a module script. Never delete or alter this script tag path to index.tsx.
+3. THEME STABILITY: The interface utilizes an OLED Black aesthetic theme canvas defined via custom extended colors inside 'apps/web/tailwind.config.js'. Always use these tokens ('bg-operation-dark', 'bg-operation-panel', etc.) to match the unified layout look.
+
+## 🧠 ON-DEMAND LLM ARCHITECTURE RULES (apps/api)
+1. SYNCHRONOUS FLOW ONLY: The system handles compilation entirely on-demand via a classic request-response structure. Generation only triggers when the user submits a text input command from the chat panel. There are no active streams or continuous autonomous background agents.
+2. PROMPT COHESION: The system execution instructions given to Gemini live inside the 'SYSTEM_PROMPT' string block within 'apps/api/src/architect.ts'.
+3. GRAPH RULES MIRRORING: If you modify system constraints, node logic, or structural requirements in the codebase or rules layer, check if 'apps/api/src/architect.ts' requires a matching prompt update so that the output payload generated on user submission fits perfectly.
+4. STRICT JSON EXPECTATION: The endpoint route handler in 'apps/api/src/index.ts' parses raw response objects by isolating text bounds using curly bracket anchors. Ensure backend structures remain geared to output stringified JSON without wrapping conversational Markdown back to the client interface.
