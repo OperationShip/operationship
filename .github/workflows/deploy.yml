@@ -21,7 +21,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     
-    # 🎯 Instructs all terminal steps below to execute inside the web app folder
     defaults:
       run:
         working-directory: apps/web
@@ -30,10 +29,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js v18
+      - name: Set up Node.js v22
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install Dependencies
         run: npm install
@@ -42,12 +41,13 @@ jobs:
         run: npm run build
 
       - name: Setup GitHub Pages Config
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload Build Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          # 🎯 Explicitly targets the new nested build output path
           path: apps/web/dist
 
       - name: Deploy to GitHub Pages
