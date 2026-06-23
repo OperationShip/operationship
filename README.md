@@ -24,7 +24,7 @@ Before you begin, ensure you have the following installed:
 
 *   **Git**: For cloning the repository.
 *   **Node.js** (LTS version): For frontend development and potentially backend tools.
-*   **Docker & Docker Compose**: For containerized deployment of services (recommended for local development).
+*   **Docker & Docker Compose**: For containerized deployment of services.
 *   **[Your Backend Language/Runtime Here]** (e.g., Python 3.9+, Go 1.18+): If you're not using Docker for the backend service.
 
 ### Installation
@@ -72,7 +72,7 @@ REACT_APP_API_BASE_URL=http://localhost:8080/api
 
 ### Running the Application
 
-#### Using Docker Compose (Recommended)
+#### Using Docker Compose
 
 For a fully containerized local environment:
 
